@@ -3,6 +3,7 @@ import "./Home.css";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from "react-responsive-carousel";
 import { Link } from "react-router-dom";
+import MovieList from "../../components/movieList/MovieList";
 
 const Home = () => {
     const [popularMovies, setPopularMovies] = useState([]);
@@ -20,14 +21,15 @@ const Home = () => {
             <Carousel
                 showThumbs={false}
                 autoPlay={true}
-                transitionTime={3000}
+                transitionTime={1000}
                 infiniteLoop={true}
                 showStatus={false}
+                interval={5000}
             >
                 {popularMovies.map((movie) => (
                     <Link
                         style={{ textDecoration: "none", color: "white" }}
-                        to={`/movies/${movie.id}`}
+                        to={`/movie/${movie.id}`}
                     >
                         <div className="posterImage">
                             <img
@@ -55,6 +57,9 @@ const Home = () => {
                     </Link>
                 ))}
             </Carousel>
+            <div className="popularMovies">
+                <MovieList />
+            </div>
         </div>
     );
 };
