@@ -1,21 +1,29 @@
-import React from 'react'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import { Box } from '@mui/material'
-import { Navbar, Feed, MovieDetail, SearchFeed } from './components'
+import "./App.css";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Header from "./components/header/Header.jsx";
+import Home from "./pages/home/Home";
+import MovieList from "./components/movieList/MovieList";
 
-const App = () => (
-    <div>
-      <BrowserRouter>
-        <Box sx={{}} className="bg-green-300">
-          <Navbar />
-          <Routes>
-            <Route path="/" exact element={ <Feed /> }/>
-            <Route path="/movie/:id" element={ <MovieDetail /> }/>
-            <Route path="/search/:searchTerm" element={ <SearchFeed /> }/>
-          </Routes>
-        </Box>
-      </BrowserRouter>
-    </div>
-)
+function App() {
+    return (
+        <div className="App">
+            <BrowserRouter>
+                <Header />
+                <Routes>
+                    <Route index element={<Home />}></Route>
+                    <Route
+                        path="movie/:id"
+                        element={<h1>Movie Detail Page</h1>}
+                    ></Route>
+                    <Route
+                        path="movies/:type"
+                        element={<MovieList />}
+                    ></Route>
+                    <Route path="/*" element={<h1>Error 404</h1>}></Route>
+                </Routes>
+            </BrowserRouter>
+        </div>
+    );
+}
 
-export default App
+export default App;
