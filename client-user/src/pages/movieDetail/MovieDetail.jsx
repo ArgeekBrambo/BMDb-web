@@ -1,9 +1,18 @@
 import React, { useEffect, useState } from "react";
 import "./MovieDetail.css";
 import { useParams } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { MOVIES_MOVIE_DETAILS } from "../../stores/actionType";
+import { actionMovieDetails } from "../../stores/actionCreator";
+import { fetchMovieDetails } from "../../stores/actionCreator";
 
 const Movie = () => {
-    const [currentMovieDetail, setMovie] = useState();
+    // const [currentMovieDetail, setMovie] = useState();
+
+    const { movieDetails } = useSelector((state) => state.movieDetails);
+    console.log(movieDetails, "movieDetail");
+    const dispatch = useDispatch();
+
     const { id } = useParams();
 
     useEffect(() => {
@@ -12,11 +21,15 @@ const Movie = () => {
     }, []);
 
     const getData = () => {
-        fetch(
-            `https://api.themoviedb.org/3/movie/${id}?api_key=4e44d9029b1270a757cddc766a1bcb63&language=en-US`
-        )
-            .then((res) => res.json())
-            .then((data) => setMovie(data));
+        // fetch(
+        //     `https://api.themoviedb.org/3/movie/${id}?api_key=4e44d9029b1270a757cddc766a1bcb63&language=en-US`
+        // )
+        //     .then((res) => res.json())
+        //     .then((data) => {
+        //         console.log(data, "data");
+        //         dispatch(actionMovieDetails(data));
+        //     });
+        dispatch(fetchMovieDetails(id));
     };
 
     return (
@@ -25,8 +38,8 @@ const Movie = () => {
                 <img
                     className="movie__backdrop"
                     src={`https://image.tmdb.org/t/p/original${
-                        currentMovieDetail
-                            ? currentMovieDetail.backdrop_path
+                        movieDetails
+                            ? movieDetails.backdrop_path
                             : ""
                     }`}
                     alt="movie-backdrop"
@@ -38,8 +51,8 @@ const Movie = () => {
                         <img
                             className="movie__poster"
                             src={`https://image.tmdb.org/t/p/original${
-                                currentMovieDetail
-                                    ? currentMovieDetail.poster_path
+                                movieDetails
+                                    ? movieDetails.poster_path
                                     : ""
                             }`}
                             alt="movie-poster"
@@ -49,42 +62,42 @@ const Movie = () => {
                 <div className="movie__detailRight">
                     <div className="movie__detailRightTop">
                         <div className="movie__name">
-                            {currentMovieDetail
-                                ? currentMovieDetail.original_title
+                            {movieDetails
+                                ? movieDetails.original_title
                                 : ""}
                         </div>
                         <div className="movie__tagline">
-                            {currentMovieDetail
-                                ? currentMovieDetail.tagline
+                            {movieDetails
+                                ? movieDetails.tagline
                                 : ""}
                         </div>
                         <div className="movie__rating">
-                            {currentMovieDetail
-                                ? currentMovieDetail.vote_average
+                            {movieDetails
+                                ? movieDetails.vote_average
                                 : ""}{" "}
-                            <i class="fas fa-star" />
+                            <i className="fas fa-star" />
                             <span className="movie__voteCount">
-                                {currentMovieDetail
+                                {movieDetails
                                     ? "(" +
-                                      currentMovieDetail.vote_count +
+                                      movieDetails.vote_count +
                                       ") votes"
                                     : ""}
                             </span>
                         </div>
                         <div className="movie__runtime">
-                            {currentMovieDetail
-                                ? currentMovieDetail.runtime + " mins"
+                            {movieDetails
+                                ? movieDetails.runtime + " mins"
                                 : ""}
                         </div>
                         <div className="movie__releaseDate">
-                            {currentMovieDetail
+                            {movieDetails
                                 ? "Release date: " +
-                                  currentMovieDetail.release_date
+                                  movieDetails.release_date
                                 : ""}
                         </div>
                         <div className="movie__genres">
-                            {currentMovieDetail && currentMovieDetail.genres
-                                ? currentMovieDetail.genres.map((genre) => (
+                            {movieDetails && movieDetails.genres
+                                ? movieDetails.genres.map((genre) => (
                                       <>
                                           <span
                                               className="movie__genre"
@@ -100,8 +113,8 @@ const Movie = () => {
                     <div className="movie__detailRightBottom">
                         <div className="synopsisText">Synopsis</div>
                         <div>
-                            {currentMovieDetail
-                                ? currentMovieDetail.overview
+                            {movieDetails
+                                ? movieDetails.overview
                                 : ""}
                         </div>
                     </div>
@@ -109,9 +122,9 @@ const Movie = () => {
             </div>
             <div className="movie__links">
                 <div className="movie__heading">Useful Links</div>
-                {currentMovieDetail && currentMovieDetail.homepage && (
+                {movieDetails && movieDetails.homepage && (
                     <a
-                        href={currentMovieDetail.homepage}
+                        href={movieDetails.homepage}
                         target="blank"
                         style={{ textDecoration: "none" }}
                     >
@@ -123,11 +136,11 @@ const Movie = () => {
                         </p>
                     </a>
                 )}
-                {currentMovieDetail && currentMovieDetail.imdb_id && (
+                {movieDetails && movieDetails.imdb_id && (
                     <a
                         href={
                             "https://www.imdb.com/title/" +
-                            currentMovieDetail.imdb_id
+                            movieDetails.imdb_id
                         }
                         target="blank"
                         style={{ textDecoration: "none" }}
@@ -143,9 +156,9 @@ const Movie = () => {
             </div>
             <div className="movie__heading">Production companies</div>
             <div className="movie__production">
-                {currentMovieDetail &&
-                    currentMovieDetail.production_companies &&
-                    currentMovieDetail.production_companies.map((company) => (
+                {movieDetails &&
+                    movieDetails.production_companies &&
+                    movieDetails.production_companies.map((company) => (
                         <>
                             {company.logo_path && (
                                 <span className="productionCompanyImage">
