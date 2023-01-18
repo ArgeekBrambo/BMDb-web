@@ -4,6 +4,7 @@ import Dashboard from "../pages/Dashboard";
 import MainLayouts from "../layouts/MainLayouts";
 import MovieList from "../pages/MovieList";
 import GenreList from "../pages/GenreList";
+import Register from "../pages/Register";
 
 const router = createBrowserRouter([
     {
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
             {
                 path: '/genres',
                 element: <GenreList />
+            },
+            {
+                path: '/register',
+                element: <Register />
             }
         ]
     }

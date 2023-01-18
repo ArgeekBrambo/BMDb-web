@@ -1,0 +1,78 @@
+{
+    "Movies": [
+        {
+            "id": 1,
+            "original_title": "Puss in Boots: The Last Wish",
+            "tagline": "Puss in Boots: The Last Wish",
+            "vote_average": 8.627,
+            "vote_count": 1923,
+            "runtime": 103,
+            "release_date": "2022-12-07",
+            "genres": [
+                {
+                    "id": "16",
+                    "name": "Animation"
+                },
+                {
+                    "id": "28",
+                    "name": "Action"
+                },
+                {
+                    "id": "12",
+                    "name": "Adventure"
+                },
+                {
+                    "id": "35",
+                    "name": "Comedy"
+                },
+                {
+                    "id": "10751",
+                    "name": "Family"
+                },
+                {
+                    "id": "14",
+                    "name": "Fantasy"
+                }
+            ],
+            "overview": "Puss in Boots discovers that his passion for adventure has taken its toll: He has burned through eight of his nine lives, leaving him with only one life left. Puss sets out on an epic journey to find the mythical Last Wish and restore his nine lives.",
+            "homepage": "https://www.dreamworks.com/movies/puss-in-boots-the-last-wish",
+            "imdb_id": "tt3915174",
+            "castId": "",
+            "authorId": ""
+        }
+    ],
+    "Genres": [
+        {
+            "id": "16",
+            "name": "Animation"
+        },
+        {
+            "id": "28",
+            "name": "Action"
+        },
+        {
+            "id": "12",
+            "name": "Adventure"
+        },
+        {
+            "id": "35",
+            "name": "Comedy"
+        },
+        {
+            "id": "10751",
+            "name": "Family"
+        },
+        {
+            "id": "14",
+            "name": "Fantasy"
+        }
+    ],
+    "Casts": [
+        {
+            "id": "1",
+            "name": "Kocheng Oren",
+            "profilePict": "http://placekitten.com/500/500",
+            "movieId": "1"
+        }
+    ]
+}

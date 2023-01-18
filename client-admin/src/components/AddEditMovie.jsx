@@ -90,20 +90,6 @@ const AddEditMovie = ({showModal, setShowModal}) => {
                             className="text-white dark:text-gray-200"
                             htmlFor="passwordConfirmation"
                         >
-                            Vote Average
-                        </label>
-                        <input
-                            id="passwordConfirmation"
-                            type="number"
-                            className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
-                        />
-                    </div>
-
-                    <div>
-                        <label
-                            className="text-white dark:text-gray-200"
-                            htmlFor="passwordConfirmation"
-                        >
                             Vote Count
                         </label>
                         <input
@@ -123,34 +109,6 @@ const AddEditMovie = ({showModal, setShowModal}) => {
                         <input
                             id="passwordConfirmation"
                             type="number"
-                            className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
-                        />
-                    </div>
-
-                    <div>
-                        <label
-                            className="text-white dark:text-gray-200"
-                            htmlFor="passwordConfirmation"
-                        >
-                            Homepage
-                        </label>
-                        <input
-                            id="passwordConfirmation"
-                            type="text"
-                            className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
-                        />
-                    </div>
-
-                    <div>
-                        <label
-                            className="text-white dark:text-gray-200"
-                            htmlFor="passwordConfirmation"
-                        >
-                            IMDB Id
-                        </label>
-                        <input
-                            id="passwordConfirmation"
-                            type="text"
                             className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
                         />
                     </div>
@@ -197,7 +155,7 @@ const AddEditMovie = ({showModal, setShowModal}) => {
                     </div>
                 </div>
 
-                <div className="flex justify-between mt-6">
+                <div className="flex gap-4 mt-6">
                     <button className="px-6 py-2 leading-5 text-white transition-colors duration-200 transform bg-pink-500 rounded-md hover:bg-pink-700 focus:outline-none focus:bg-gray-600">
                         Add Cast
                     </button>

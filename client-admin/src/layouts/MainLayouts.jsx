@@ -4,10 +4,12 @@ import Sidenav from "../components/Sidenav";
 
 const MainLayouts = () => {
     return (
-        <div className="flex">
+        <div className="flex w-screen">
             {/* <Sidenav /> */}
             <Sidebar />
-            <Outlet />
+            <div className="relative w-full">
+                <Outlet className="relative"/>
+            </div>
         </div>
     );
 };

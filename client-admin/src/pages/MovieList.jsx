@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import AddEditMovie from "../components/AddEditMovie";
 
 const MovieList = () => {
@@ -13,9 +14,9 @@ const MovieList = () => {
     return (
         <>
             {/* Movie List */}
-            <div className="p-1.5 min-w-full inline-block align-middle">
+            <div className="p-1.5 w-full inline-block align-middle">
                 <div className="flex min-w-full justify-between my-3 px-3">
-                    <h1>Movie List</h1>
+                    <h1 className="text-4xl font-bold">Movie List</h1>
                     <button
                         className="py-2 px-4 shadow-md no-underline rounded-full bg-sky-600 text-white font-sans font-semibold text-sm border-blue btn-primary hover:text-white hover:bg-blue-light focus:outline-none active:shadow-none mr-2"
                         onClick={toggleModal}
@@ -54,19 +55,7 @@ const MovieList = () => {
                                     scope="col"
                                     className="px-6 py-3 text-xs font-bold text-left text-gray-500 uppercase "
                                 >
-                                    ID
-                                </th>
-                                <th
-                                    scope="col"
-                                    className="px-6 py-3 text-xs font-bold text-left text-gray-500 uppercase "
-                                >
                                     Original Title
-                                </th>
-                                <th
-                                    scope="col"
-                                    className="px-6 py-3 text-xs font-bold text-left text-gray-500 uppercase "
-                                >
-                                    Tagline
                                 </th>
                                 <th
                                     scope="col"
@@ -94,7 +83,7 @@ const MovieList = () => {
                                 </th>
                                 <th
                                     scope="col"
-                                    className="px-6 py-3 text-xs font-bold text-left text-gray-500 uppercase min-w-[200px]"
+                                    className="px-6 py-3 text-xs font-bold text-left text-gray-500 uppercase min-w-[200px] hidden"
                                 >
                                     Synopsis
                                 </th>
@@ -103,12 +92,6 @@ const MovieList = () => {
                                     className="px-6 py-3 text-xs font-bold text-left text-gray-500 uppercase "
                                 >
                                     Vote Average
-                                </th>
-                                <th
-                                    scope="col"
-                                    className="px-6 py-3 text-xs font-bold text-left text-gray-500 uppercase "
-                                >
-                                    Vote Count
                                 </th>
                                 <th
                                     scope="col"
@@ -136,18 +119,6 @@ const MovieList = () => {
                                 </th>
                                 <th
                                     scope="col"
-                                    className="px-6 py-3 text-xs font-bold text-left text-gray-500 uppercase "
-                                >
-                                    Homepage
-                                </th>
-                                <th
-                                    scope="col"
-                                    className="px-6 py-3 text-xs font-bold text-left text-gray-500 uppercase "
-                                >
-                                    IMDb ID
-                                </th>
-                                <th
-                                    scope="col"
                                     className="px-6 py-3 text-xs font-bold text-right text-gray-500 uppercase "
                                 >
                                     Action
@@ -159,14 +130,8 @@ const MovieList = () => {
                                 <td className="px-6 py-4 text-sm font-medium text-gray-800 whitespace-nowrap">
                                     1
                                 </td>
-                                <td className="px-6 py-4 text-sm font-medium text-gray-800 whitespace-nowrap">
-                                    1
-                                </td>
                                 <td className="px-6 py-4 text-sm text-gray-800 whitespace-wrap">
                                     Puss in Boots: The Last Wish
-                                </td>
-                                <td className="px-6 py-4 text-sm text-gray-800 whitespace-wrap">
-                                    Say hola to his little friends.
                                 </td>
                                 <td className="px-6 py-4 text-sm text-gray-800 whitespace-wrap">
                                     <img
@@ -182,16 +147,17 @@ const MovieList = () => {
                                 </td>
                                 <td className="px-6 py-4 text-sm text-gray-800 whitespace-wrap">
                                     <img
-                                        src="http://placekitten.com/200/200"
+                                        src="http://placekitten.com/500/500"
                                         alt=""
+                                        className=""
                                     />
                                 </td>
                                 <td className="px-6 py-4 text-sm text-gray-800 whitespace-wrap">
-                                    <button className="py-2 px-4 shadow-md no-underline rounded-full bg-sky-600 text-white font-sans font-semibold text-sm border-blue btn-primary hover:text-white hover:bg-blue-light focus:outline-none active:shadow-none mr-2">
+                                    <button className="py-2 px-4 shadow-md no-underline rounded-md bg-sky-600 text-white font-sans font-semibold text-sm border-blue btn-primary hover:text-white hover:bg-blue-light focus:outline-none active:shadow-none mr-2">
                                         Show Cast
                                     </button>
                                 </td>
-                                <td className="px-6 py-4 text-sm text-gray-800 whitespace-wrap">
+                                <td className="px-6 py-4 text-sm text-gray-800 whitespace-wrap hidden">
                                     Puss in Boots discovers that his passion for
                                     adventure has taken its toll: He has burned
                                     through eight of his nine lives, leaving him
@@ -201,9 +167,6 @@ const MovieList = () => {
                                 </td>
                                 <td className="px-6 py-4 text-sm text-gray-800 whitespace-wrap">
                                     8.6
-                                </td>
-                                <td className="px-6 py-4 text-sm text-gray-800 whitespace-wrap">
-                                    1824
                                 </td>
                                 <td className="px-6 py-4 text-sm text-gray-800 whitespace-wrap">
                                     103
@@ -218,19 +181,13 @@ const MovieList = () => {
                                 <td className="px-6 py-4 text-sm text-gray-800 whitespace-wrap">
                                     DreamWorks
                                 </td>
-                                <td className="px-6 py-4 text-sm text-gray-800 whitespace-wrap">
-                                    https://www.dreamworks.com/movies/puss-in-boots-the-last-wish
-                                </td>
-                                <td className="px-6 py-4 text-sm text-gray-800 whitespace-wrap">
-                                    tt3915174
-                                </td>
                                 <td className="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
-                                    <a
+                                    <Link
                                         className="text-green-500 hover:text-green-700 mr-3"
-                                        href="#"
+                                        onClick={toggleModal}
                                     >
                                         Edit
-                                    </a>
+                                    </Link>
                                     <a
                                         className="text-red-500 hover:text-red-700"
                                         href="#"
@@ -245,7 +202,7 @@ const MovieList = () => {
             </div>
             {
             showModal && (
-                <div className="absolute h-screen w-screen justify-center align-middle items-center bg-slate-900 bg-opacity-70">
+                <div className="absolute top-0 h-screen min-w-full overflow-visible justify-center align-middle items-center bg-slate-900 bg-opacity-70">
                     <AddEditMovie showModal={showModal} setShowModal={setShowModal}/>
                 </div>
             )

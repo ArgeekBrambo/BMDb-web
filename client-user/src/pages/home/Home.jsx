@@ -4,16 +4,27 @@ import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a lo
 import { Carousel } from "react-responsive-carousel";
 import { Link } from "react-router-dom";
 import MovieList from "../../components/movieList/MovieList";
+import { useSelector, useDispatch } from "react-redux"; // useSelector is a hook that allows us to get the state from the store, and useDispatch is a hook that allows us to dispatch an action to the reducer
 
 const Home = () => {
-    const [popularMovies, setPopularMovies] = useState([]);
 
-    useEffect(() => {
+    const { movies } = useSelector((state) => state.movies); // movies is the name of the reducer, and state.movies is the name of the state
+    // console.log(movies);
+
+    const dispatch = useDispatch(); // dispatch is a function that sends an action to the reducer, and the reducer will update the state
+    // const [popularMovies, setPopularMovies] = useState([]);
+
+    useEffect(() => { // useEffect is a hook that runs when the component is mounted, and it runs only once
         fetch(
             "https://api.themoviedb.org/3/movie/popular?api_key=fcf91c8aa652949d7dd3db150a5fcc8b&language=en-US"
         )
-            .then((res) => res.json())
-            .then((data) => setPopularMovies(data.results));
+            .then((res) => res.json()) // res.json() is a promise, so we need to use .then, and the data is the response from the API
+            .then((data) => { // data is the response from the API, and we can use it to update the state
+                dispatch({ // dispatch is a function that sends an action to the reducer, and the reducer will update the state
+                    type: "POPULAR_MOVIES", // type is the name of the action, and it is a string
+                    payload: data, // payload is the data that we want to send to the reducer
+                });
+            });
     }, []);
 
     return (
@@ -26,7 +37,7 @@ const Home = () => {
                 showStatus={false}
                 interval={5000}
             >
-                {popularMovies.map((movie) => (
+                {movies.results.map((movie) => ( // movies.results is the array of movies, and we map through it to get each movie
                     <Link
                         style={{ textDecoration: "none", color: "white" }}
                         to={`/movie/${movie.id}`}
