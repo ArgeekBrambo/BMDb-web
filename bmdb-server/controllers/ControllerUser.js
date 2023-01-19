@@ -1,12 +1,14 @@
-const { User } = require("../models");
+const { User, sequelize } = require("../models");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
 class ControllerUser {
     static async register(req, res, next) {
+        const trans = await sequelize.transaction();
         try {
             const { username, email, password, role, phoneNumber, address } =
                 req.body;
+            console.log(email);
             const newUser = await User.create({
                 username,
                 email,
@@ -14,10 +16,14 @@ class ControllerUser {
                 role: "admin",
                 phoneNumber,
                 address,
+            }, {
+                transaction: trans
             });
-            res.status(201).json(newUser.username, newUser.email, newUser.role);
+            await trans.commit()
+            res.status(201).json({username: newUser.username, email: newUser.email, role: newUser.role});
         } catch (error) {
             next(error);
+            await trans.rollback()
         }
     }
 

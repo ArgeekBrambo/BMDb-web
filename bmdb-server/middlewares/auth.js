@@ -4,6 +4,7 @@ const { User } = require("../models");
 async function authentication(req, res, next) {
     try {
         const access_token = req.headers.access_token;
+        // console.log(req.headers);
         if(!access_token) {
             throw { name: "AuthenticationFailed" };
         }

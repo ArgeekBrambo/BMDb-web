@@ -61,9 +61,10 @@ const Sidebar = () => {
                             </Link>
                         </li>
                         <li className="rounded-sm">
-                            <a
-                                href="#"
+                            <Link
+                                to="/login"
                                 className="flex items-center p-2 space-x-3 rounded-md"
+                                onClick={() => localStorage.clear()}
                             >
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
@@ -80,7 +81,7 @@ const Sidebar = () => {
                                     />
                                 </svg>
                                 <span>Logout</span>
-                            </a>
+                            </Link>
                         </li>
                     </ul>
                 </div>
