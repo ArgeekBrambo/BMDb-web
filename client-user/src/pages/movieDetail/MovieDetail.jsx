@@ -10,10 +10,11 @@ const Movie = () => {
     // const [currentMovieDetail, setMovie] = useState();
 
     const { movieDetails } = useSelector((state) => state.movieDetails);
-    console.log(movieDetails, "movieDetail");
+    // console.log(movieDetails, "movieDetail");
     const dispatch = useDispatch();
 
     const { id } = useParams();
+    // console.log(id);
 
     useEffect(() => {
         getData();
@@ -38,9 +39,7 @@ const Movie = () => {
                 <img
                     className="movie__backdrop"
                     src={`https://image.tmdb.org/t/p/original${
-                        movieDetails
-                            ? movieDetails.backdrop_path
-                            : ""
+                        movieDetails ? movieDetails.backdrop_path : ""
                     }`}
                     alt="movie-backdrop"
                 />
@@ -51,9 +50,7 @@ const Movie = () => {
                         <img
                             className="movie__poster"
                             src={`https://image.tmdb.org/t/p/original${
-                                movieDetails
-                                    ? movieDetails.poster_path
-                                    : ""
+                                movieDetails ? movieDetails.poster_path : ""
                             }`}
                             alt="movie-poster"
                         />
@@ -62,115 +59,57 @@ const Movie = () => {
                 <div className="movie__detailRight">
                     <div className="movie__detailRightTop">
                         <div className="movie__name">
-                            {movieDetails
-                                ? movieDetails.original_title
-                                : ""}
-                        </div>
-                        <div className="movie__tagline">
-                            {movieDetails
-                                ? movieDetails.tagline
-                                : ""}
+                            {movieDetails ? movieDetails.original_title : ""}
                         </div>
                         <div className="movie__rating">
-                            {movieDetails
-                                ? movieDetails.vote_average
-                                : ""}{" "}
+                            {movieDetails ? movieDetails.vote_average : ""}{" "}
                             <i className="fas fa-star" />
                             <span className="movie__voteCount">
                                 {movieDetails
-                                    ? "(" +
-                                      movieDetails.vote_count +
-                                      ") votes"
+                                    ? "(" + movieDetails.vote_count + ") votes"
                                     : ""}
                             </span>
                         </div>
-                        <div className="movie__runtime">
-                            {movieDetails
-                                ? movieDetails.runtime + " mins"
-                                : ""}
-                        </div>
                         <div className="movie__releaseDate">
                             {movieDetails
-                                ? "Release date: " +
-                                  movieDetails.release_date
+                                ? "Release date: " + movieDetails.release_date
                                 : ""}
                         </div>
                         <div className="movie__genres">
-                            {movieDetails && movieDetails.genres
-                                ? movieDetails.genres.map((genre) => (
-                                      <>
-                                          <span
-                                              className="movie__genre"
-                                              id={genre.id}
-                                          >
-                                              {genre.name}
-                                          </span>
-                                      </>
-                                  ))
-                                : ""}
+                            {movieDetails && movieDetails.genre ? (
+                                <>
+                                    <span
+                                        className="movie__genre"
+                                        id={movieDetails.genre.id}
+                                    >
+                                        {movieDetails.genre.name}
+                                    </span>
+                                </>
+                            ) : (
+                                ""
+                            )}
                         </div>
                     </div>
                     <div className="movie__detailRightBottom">
                         <div className="synopsisText">Synopsis</div>
-                        <div>
-                            {movieDetails
-                                ? movieDetails.overview
-                                : ""}
-                        </div>
+                        <div>{movieDetails ? movieDetails.overview : ""}</div>
                     </div>
                 </div>
             </div>
-            <div className="movie__links">
-                <div className="movie__heading">Useful Links</div>
-                {movieDetails && movieDetails.homepage && (
-                    <a
-                        href={movieDetails.homepage}
-                        target="blank"
-                        style={{ textDecoration: "none" }}
-                    >
-                        <p>
-                            <span className="movie__homeButton movie__Button">
-                                Homepage{" "}
-                                <i className="newTab fas fa-external-link-alt"></i>
-                            </span>
-                        </p>
-                    </a>
-                )}
-                {movieDetails && movieDetails.imdb_id && (
-                    <a
-                        href={
-                            "https://www.imdb.com/title/" +
-                            movieDetails.imdb_id
-                        }
-                        target="blank"
-                        style={{ textDecoration: "none" }}
-                    >
-                        <p>
-                            <span className="movie__imdbButton movie__Button">
-                                IMDb
-                                <i className="newTab fas fa-external-link-alt"></i>
-                            </span>
-                        </p>
-                    </a>
-                )}
-            </div>
-            <div className="movie__heading">Production companies</div>
+            <div className="movie__heading">Cast</div>
             <div className="movie__production">
                 {movieDetails &&
-                    movieDetails.production_companies &&
-                    movieDetails.production_companies.map((company) => (
+                    movieDetails.MovieCasts &&
+                    movieDetails.MovieCasts.map((cast) => (
                         <>
-                            {company.logo_path && (
+                            {cast.cast.profilePict && (
                                 <span className="productionCompanyImage">
                                     <img
-                                        className="movie__productionComapany"
-                                        src={
-                                            "https://image.tmdb.org/t/p/original" +
-                                            company.logo_path
-                                        }
+                                        className="movie__productionComapany rounded-full"
+                                        src={cast.cast.profilePict}
                                         alt="ph-logo"
                                     />
-                                    <span>{company.name}</span>
+                                    <span>{cast.cast.name}</span>
                                 </span>
                             )}
                         </>

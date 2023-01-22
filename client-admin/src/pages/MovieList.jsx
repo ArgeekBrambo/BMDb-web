@@ -1,30 +1,69 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import AddEditMovie from "../components/AddEditMovie";
+import React, { useEffect } from "react";
+import { Link, Outlet, useParams } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { getMovies, getMovieById, deleteMovie } from "../stores/actionCreator";
 
 const MovieList = () => {
     // trigger modal
-    const [showModal, setShowModal] = useState(false);
+    const { modalActive } = useSelector((state) => state.movieReducer);
+    const { movies } = useSelector((state) => state.movieReducer);
+    const { deletedMovie } = useSelector((state) => state.movieReducer);
 
-    // toggle modal
-    const toggleModal = () => {
-        setShowModal(!showModal);
+    const dispatch = useDispatch();
+
+    const setAddModalActive = () => {
+        dispatch({ type: "toggleModal", payload: true });
     };
+
+    const handleEdit = (id) => {
+        dispatch({ type: "toggleModal", payload: true });
+        dispatch({ type: "isEdit", payload: true });
+        // console.log(id);
+        dispatch(getMovieById(id));
+
+        // dispatch(getMovieById(id))
+        //  dispatch(getMovieById(id))
+    };
+    
+    const handleDelete = (id) => {
+        dispatch(deleteMovie(id));
+    }
+    // toggle modal
+
+    useEffect(() => {
+        dispatch(getMovies());
+    }, []);
+
+    useEffect(() => {
+        dispatch(getMovies());
+    }, [modalActive]);
+
+    useEffect(() => {
+        // console.log(deletedMovie, "deletedMovie");
+        dispatch(getMovies());
+    }, [deletedMovie]);
 
     return (
         <>
+            {modalActive && (
+                <div className="fixed z-50 h-screen w-screen top-[15%]">
+                    <Outlet />
+                </div>
+            )}
             {/* Movie List */}
             <div className="p-1.5 w-full inline-block align-middle">
                 <div className="flex min-w-full justify-between my-3 px-3">
                     <h1 className="text-4xl font-bold">Movie List</h1>
-                    <button
-                        className="py-2 px-4 shadow-md no-underline rounded-full bg-sky-600 text-white font-sans font-semibold text-sm border-blue btn-primary hover:text-white hover:bg-blue-light focus:outline-none active:shadow-none mr-2"
-                        onClick={toggleModal}
-                    >
-                        Add Movie
-                    </button>
+                    <Link to="/movies/add">
+                        <button
+                            className="py-2 px-4 shadow-md no-underline rounded-full bg-sky-600 text-white font-sans font-semibold text-sm border-blue btn-primary hover:text-white hover:bg-blue-light focus:outline-none active:shadow-none mr-2"
+                            onClick={setAddModalActive}
+                        >
+                            Add Movie
+                        </button>
+                    </Link>
                 </div>
-                <div className="max-w-md rounded-lg overflow-hidden md:max-w-xl">
+                <div className="max-w-md rounded-lg md:max-w-xl">
                     <div className="md:flex">
                         <div className="w-full p-3">
                             <div className="relative">
@@ -41,7 +80,7 @@ const MovieList = () => {
                         </div>
                     </div>
                 </div>
-                <div className="border rounded-lg overflow-scroll">
+                <div className="border rounded-lg">
                     <table className="min-w-full divide-y divide-gray-200">
                         <thead className="bg-gray-50">
                             <tr>
@@ -97,12 +136,6 @@ const MovieList = () => {
                                     scope="col"
                                     className="px-6 py-3 text-xs font-bold text-left text-gray-500 uppercase "
                                 >
-                                    Runtime(mins)
-                                </th>
-                                <th
-                                    scope="col"
-                                    className="px-6 py-3 text-xs font-bold text-left text-gray-500 uppercase "
-                                >
                                     Release Date
                                 </th>
                                 <th
@@ -119,94 +152,105 @@ const MovieList = () => {
                                 </th>
                                 <th
                                     scope="col"
-                                    className="px-6 py-3 text-xs font-bold text-right text-gray-500 uppercase "
+                                    className="px-6 py-3 text-xs font-bold text-gray-500 uppercase text-center"
                                 >
                                     Action
                                 </th>
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-gray-200">
-                            <tr>
-                                <td className="px-6 py-4 text-sm font-medium text-gray-800 whitespace-nowrap">
-                                    1
-                                </td>
-                                <td className="px-6 py-4 text-sm text-gray-800 whitespace-wrap">
-                                    Puss in Boots: The Last Wish
-                                </td>
-                                <td className="px-6 py-4 text-sm text-gray-800 whitespace-wrap">
-                                    <img
-                                        src="https://image.tmdb.org/t/p/original/kuf6dutpsT0vSVehic3EZIqkOBt.jpg"
-                                        alt=""
-                                    />
-                                </td>
-                                <td className="px-6 py-4 text-sm text-gray-800 whitespace-wrap">
-                                    <img
-                                        src="https://image.tmdb.org/t/p/original/r9PkFnRUIthgBp2JZZzD380MWZy.jpg"
-                                        alt=""
-                                    />
-                                </td>
-                                <td className="px-6 py-4 text-sm text-gray-800 whitespace-wrap">
-                                    <img
-                                        src="http://placekitten.com/500/500"
-                                        alt=""
-                                        className=""
-                                    />
-                                </td>
-                                <td className="px-6 py-4 text-sm text-gray-800 whitespace-wrap">
-                                    <button className="py-2 px-4 shadow-md no-underline rounded-md bg-sky-600 text-white font-sans font-semibold text-sm border-blue btn-primary hover:text-white hover:bg-blue-light focus:outline-none active:shadow-none mr-2">
-                                        Show Cast
-                                    </button>
-                                </td>
-                                <td className="px-6 py-4 text-sm text-gray-800 whitespace-wrap hidden">
-                                    Puss in Boots discovers that his passion for
-                                    adventure has taken its toll: He has burned
-                                    through eight of his nine lives, leaving him
-                                    with only one life left. Puss sets out on an
-                                    epic journey to find the mythical Last Wish
-                                    and restore his nine lives.
-                                </td>
-                                <td className="px-6 py-4 text-sm text-gray-800 whitespace-wrap">
-                                    8.6
-                                </td>
-                                <td className="px-6 py-4 text-sm text-gray-800 whitespace-wrap">
-                                    103
-                                </td>
-                                <td className="px-6 py-4 text-sm text-gray-800 whitespace-wrap">
-                                    2022-12-07
-                                </td>
-                                <td className="px-6 py-4 text-sm text-gray-800 whitespace-wrap">
-                                    Animation, Action, Adventure, Comedy,
-                                    Family, Fantasy
-                                </td>
-                                <td className="px-6 py-4 text-sm text-gray-800 whitespace-wrap">
-                                    DreamWorks
-                                </td>
-                                <td className="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
-                                    <Link
-                                        className="text-green-500 hover:text-green-700 mr-3"
-                                        onClick={toggleModal}
-                                    >
-                                        Edit
-                                    </Link>
-                                    <a
-                                        className="text-red-500 hover:text-red-700"
-                                        href="#"
-                                    >
-                                        Delete
-                                    </a>
-                                </td>
-                            </tr>
+                            {movies.map((movie, index) => {
+                                return (
+                                    <tr key={movie.id}>
+                                        <td className="px-6 py-4 text-sm font-medium text-gray-800 whitespace-nowrap">
+                                            {index + 1}
+                                        </td>
+                                        <td className="px-6 py-4 text-sm text-gray-800 whitespace-wrap">
+                                            {movie.original_title}
+                                        </td>
+                                        <td className="px-6 py-4 text-sm text-gray-800 whitespace-wrap">
+                                            <img
+                                                src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
+                                                alt="poster"
+                                            />
+                                        </td>
+                                        <td className="px-6 py-4 text-sm text-gray-800 whitespace-wrap">
+                                            <img
+                                                src={`https://image.tmdb.org/t/p/w500/${movie.backdrop_path}`}
+                                                alt="backdrop"
+                                            />
+                                        </td>
+                                        <td className="px-6 py-4 text-sm text-gray-800 whitespace-wrap">
+                                            {movie.MovieCasts.map((cast) => {
+                                                return (
+                                                    // <p>{JSON.stringify(cast)}</p>
+                                                    <img
+                                                        src={
+                                                            cast.cast
+                                                                .profilePict
+                                                        }
+                                                        alt="cast pic"
+                                                        key={cast?.id}
+                                                        className="rounded-full my-3"
+                                                    />
+                                                );
+                                            })}
+                                        </td>
+                                        <td className="px-6 py-4 text-sm text-gray-800 whitespace-wrap">
+                                            <button className="py-2 px-4 shadow-md no-underline rounded-md bg-sky-600 text-white font-sans font-semibold text-sm border-blue btn-primary hover:text-white hover:bg-blue-light focus:outline-none active:shadow-none mr-2">
+                                                Show Cast
+                                            </button>
+                                        </td>
+                                        <td className="px-6 py-4 text-sm text-gray-800 whitespace-wrap hidden">
+                                            {movie.overview}
+                                        </td>
+                                        <td className="px-6 py-4 text-sm text-gray-800 whitespace-wrap">
+                                            {movie.vote_average}
+                                        </td>
+                                        <td className="px-6 py-4 text-sm text-gray-800 whitespace-wrap">
+                                            {movie.release_date}
+                                        </td>
+                                        <td className="px-6 py-4 text-sm text-gray-800 whitespace-wrap">
+                                            {movie.genre?.name}
+                                        </td>
+                                        <td className="px-6handleEdit py-4 text-sm text-gray-800 whitespace-wrap">
+                                            {movie.author.username}
+                                        </td>
+                                        <td className="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
+                                            <Link to={`/movies/${movie.id}`}>
+                                                <button
+                                                    className="py-2 px-4 shadow-md no-underline rounded-md bg-sky-600 text-white font-sans font-semibold text-sm border-blue btn-primary hover:text-white hover:bg-blue-light focus:outline-none active:shadow-none mr-2"
+                                                    // i need to use the id of the movie
+                                                    onClick={() => {
+                                                        handleEdit(movie.id);
+                                                    }}
+                                                >
+                                                    Edit
+                                                </button>
+                                            </Link>
+                                            <button className="py-2 px-4 shadow-md no-underline rounded-md bg-sky-600 text-white font-sans font-semibold text-sm border-blue btn-primary hover:text-white hover:bg-blue-light focus:outline-none active:shadow-none"
+                                                onClick={() => {
+                                                    handleDelete(movie.id);
+                                                }}
+                                            >
+                                                Delete
+                                            </button>
+                                        </td>
+                                    </tr>
+                                );
+                            })}
                         </tbody>
                     </table>
                 </div>
             </div>
-            {
-            showModal && (
-                <div className="absolute top-0 h-screen min-w-full overflow-visible justify-center align-middle items-center bg-slate-900 bg-opacity-70">
-                    <AddEditMovie showModal={showModal} setShowModal={setShowModal}/>
+            {/* {showModal && (
+                <div className="absolute top-0 h-screen min-w-full justify-center align-middle items-center bg-slate-900 bg-opacity-70">
+                    <AddEditMovie
+                        showModal={showModal}
+                        setShowModal={setShowModal}
+                    />
                 </div>
-            )
-            }
+            )} */}
         </>
     );
 };

@@ -35,7 +35,7 @@ const Home = () => {
         //         console.log("ERROR");
         //         console.log(res);
         //     });
-        dispatch(fetchMovies())
+        dispatch(fetchMovies());
     }, []);
 
     return (

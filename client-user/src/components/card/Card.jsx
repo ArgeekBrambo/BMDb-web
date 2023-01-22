@@ -8,6 +8,7 @@ const Card = ({ movie }) => {
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
+        // console.log(movie, "movie");
         setTimeout(() => {
             setIsLoading(false);
         }, 3000);

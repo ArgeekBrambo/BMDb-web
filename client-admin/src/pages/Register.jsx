@@ -16,6 +16,11 @@ const Register = () => {
         // console.log(email);
         event.preventDefault();
         dispatch(userRegister(email, password, username, phoneNumber, address));
+        setEmail("");
+        setPassword("");
+        setUsername("");
+        setPhoneNumber("");
+        setAddress("");
     }
 
     return (
@@ -37,6 +42,7 @@ const Register = () => {
                             id="username"
                             type="text"
                             className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+                            value={username}
                             onChange={(event) => setUsername(event.target.value)}
                         />
                     </div>
@@ -52,6 +58,7 @@ const Register = () => {
                             id="emailAddress"
                             type="email"
                             className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+                            value={email}
                             onChange={(event) => setEmail(event.target.value)}
                         />
                     </div>
@@ -67,6 +74,7 @@ const Register = () => {
                             id="password"
                             type="password"
                             className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+                            value={password}
                             onChange={(event) => setPassword(event.target.value)}
                         />
                     </div>
@@ -82,6 +90,7 @@ const Register = () => {
                             id="phoneNumber"
                             type="number"
                             className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+                            value={phoneNumber}
                             onChange={(event) => setPhoneNumber(event.target.value)}
                         />
                     </div>
@@ -97,6 +106,7 @@ const Register = () => {
                             id="address"
                             type="number"
                             className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+                            value={address}
                             onChange={(event) => setAddress(event.target.value)}
                         >
                         </textarea>

@@ -18,6 +18,8 @@ const Login = () => {
         // console.log(event);
         event.preventDefault();
         dispatch(userLogin(email, password));
+        setEmail("");
+        setPassword("");
         // console.log(user);
         navigate("/");
     }

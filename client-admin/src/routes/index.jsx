@@ -5,6 +5,7 @@ import MainLayouts from "../layouts/MainLayouts";
 import MovieList from "../pages/MovieList";
 import GenreList from "../pages/GenreList";
 import Register from "../pages/Register";
+import AddEditMovie from "../components/AddEditMovie";
 
 // const navigate = useNavigate();
 
@@ -33,8 +34,18 @@ const router = createBrowserRouter([
                 element: <Dashboard />,
             },
             {
-                path: "/movies",
+                path: "/movies/",
                 element: <MovieList />,
+                children: [
+                    {
+                        path: "add",
+                        element: <AddEditMovie />,
+                    },
+                    {
+                        path: ":id",
+                        element: <AddEditMovie />,
+                    }
+                ]
             },
             {
                 path: "/genres",

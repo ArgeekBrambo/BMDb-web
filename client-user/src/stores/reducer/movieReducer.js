@@ -6,7 +6,7 @@ const initialState = {
 } // This is the initial state of the store, which is an empty array of movies
 
 const movieReducer = (state = initialState, action) => { // This is the reducer, which will handle the actions, and will return the new state
-    console.log(action, 'reducer');
+    // console.log(action, 'reducer');
     switch (action.type) { // This is the switch statement that will determine what to do with the action, based on the action type
         case MOVIES_POPULAR_MOVIES: // This is the action type
             return { // This is the return statement

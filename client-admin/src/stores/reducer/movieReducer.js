@@ -1,7 +1,11 @@
-import { GET_MOVIE } from "../actionType";
+import { GET_MOVIE, GET_MOVIE_BY_ID, DELETE_MOVIE} from "../actionType";
 
 const initialState = {
     movies: [],
+    modalActive: false,
+    movieById: {},
+    isEdit: false,
+    deletedMovie: {}
 }
 
 export const movieReducer = (state = initialState, action) => {
@@ -12,7 +16,39 @@ export const movieReducer = (state = initialState, action) => {
                 ...state,
                 movies: action.payload,
             }
+        
+        case "toggleModal":
+            return {
+                ...state,
+                modalActive: action.payload,
+                isEdit: false
+            }
 
+        case "deactiveModal":
+            return {
+                ...state,
+                modalActive: action.payload,
+                isEdit: false
+            }
+
+        case GET_MOVIE_BY_ID:
+            return {
+                ...state,
+                movieById: action.payload,
+            }
+
+        case "isEdit":
+            return {
+                ...state,
+                isEdit: action.payload
+            }
+
+        case DELETE_MOVIE:
+            return {
+                ...state,
+                deletedMovie: action.payload
+            }
+    
         default:
             return state;
     }

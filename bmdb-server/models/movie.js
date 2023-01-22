@@ -25,14 +25,7 @@ module.exports = (sequelize, DataTypes) => {
         notEmpty: { msg: 'Original title is required' }
       }
     },
-    slug: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        notNull: { msg: 'Slug is required' },
-        notEmpty: { msg: 'Slug is required' }
-      }
-    },
+    slug: DataTypes.STRING,
     poster_path: DataTypes.STRING,
     backdrop_path: DataTypes.STRING,
     release_date: DataTypes.STRING,
@@ -68,5 +61,8 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     modelName: 'Movie',
   });
+  Movie.beforeCreate((instance, options) => {
+    instance.slug = instance.original_title.split(' ').join('-').toLowerCase();
+  })
   return Movie;
 };
