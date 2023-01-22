@@ -159,7 +159,7 @@ const AddEditMovie = ({ showModal, setShowModal }) => {
                         <label
                             name="castname"
                             className="text-white dark:text-gray-200"
-                            htmlFor="passwordConfirmation"
+                            htmlFor="castname"
                         >
                             Cast
                         </label>
