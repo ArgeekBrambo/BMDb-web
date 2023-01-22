@@ -9,6 +9,7 @@ import {
     DELETE_GENRE 
 } from "./actionType";
 import { toast } from 'react-toastify';
+const server = 'https://bmdb.foxhub.space';
 
 export const userLogin = (email, password) => {
     return async (dispatch) => {
@@ -18,7 +19,7 @@ export const userLogin = (email, password) => {
             }
             // console.log("email", email);
             // console.log(password, "password");
-            const response = await fetch("http://localhost:3005/user/login", {
+            const response = await fetch(`${server}/user/login`, {
                 method: "POST",
                 headers: {
                     Accept: "application/json",
@@ -33,7 +34,7 @@ export const userLogin = (email, password) => {
             const resData = await response.json();
             // console.log(resData, 'resdata');
             // localStorage.setItem("access_token", resData.access_token);
-            localStorage.setItem("access_token", resData.access_token);
+            await localStorage.setItem("access_token", resData.access_token);
             dispatch({
                 type: USER_LOGIN,
                 payload: resData,
@@ -70,7 +71,7 @@ export const userRegister = (
                 throw { message: 'Username is required' }
             }
             const response = await fetch(
-                "http://localhost:3005/user/register",
+                `${server}/user/register`,
                 {
                     method: "POST",
                     headers: {
@@ -105,7 +106,7 @@ export const userRegister = (
 export const getMovies = () => {
     return async (dispatch) => {
         try {
-            const response = await fetch("http://localhost:3005/movies", {
+            const response = await fetch(`${server}/movies`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
@@ -131,7 +132,7 @@ export const getMovies = () => {
 export const getGenres = () => {
     return async (dispatch) => {
         try {
-            const response = await fetch("http://localhost:3005/genres", {
+            const response = await fetch(`${server}/genres`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
@@ -160,7 +161,7 @@ export const addMovie = (inputForm) => {
             if(!inputForm.overview) {
                 throw { message: 'Overview is required' }
             }
-            const response = await fetch("http://localhost:3005/movies", {
+            const response = await fetch(`${server}/movies`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -188,7 +189,7 @@ export const getMovieById = (id) => {
     return async (dispatch) => {
         try {
             const response = await fetch(
-                `http://localhost:3005/movies/${id}`,
+                `${server}/movies/${id}`,
                 {
                     method: "GET",
                     headers: {
@@ -224,7 +225,7 @@ export const editMovie = (id, inputForm) => {
                 throw { message: 'Overview is required' }
             }
             const response = await fetch(
-                `http://localhost:3005/movies/${id}`,
+                `${server}/movies/${id}`,
                 {
                     method: "PUT",
                     headers: {
@@ -253,7 +254,7 @@ export const deleteMovie = (id) => {
     return async (dispatch) => {
         try {
             const response = await fetch(
-                `http://localhost:3005/movies/${id}`,
+                `${server}/movies/${id}`,
                 {
                     method: "DELETE",
                     headers: {
@@ -285,7 +286,7 @@ export const addGenre = (inputForm) => {
                 throw { message: 'Name is required' }
             }
             // console.log(inputForm, 'inputform');
-            const response = await fetch('http://localhost:3005/genres', {
+            const response = await fetch(`${server}/genres`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -312,7 +313,7 @@ export const deleteGenre = (id) => {
     return async (dispatch) => {
         try {
             const response = await fetch(
-                `http://localhost:3005/genres/${id}`,
+                `${server}/genres/${id}`,
                 {
                     method: "DELETE",
                     headers: {

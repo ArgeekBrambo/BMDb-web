@@ -16,6 +16,8 @@ import { MOVIES_MOVIE_DETAILS } from "./actionType";
 //     }
 // }
 
+const server = `https://bmdb.foxhub.space`
+
 export const fetchMovies = () => {
     return async (dispatch) => {
         // const response = await fetch('https://api.themoviedb.org/3/movie/popular?api_key=fcf91c8aa652949d7dd3db150a5fcc8b&language=en-US')
@@ -24,7 +26,7 @@ export const fetchMovies = () => {
         // // console.log(resJson.results);
         // dispatch(actionPopularMovies(resJson.results))
         try {
-            const response = await fetch('http://localhost:3005/customers/movies', {
+            const response = await fetch(`${server}/customers/movies`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -58,7 +60,7 @@ export const fetchMovieDetails = (id) => {
         // console.log(resJson);
         // dispatch(actionMovieDetails(resJson))
         try {
-            const response = await fetch(`http://localhost:3005/customers/movies/${id}`, {
+            const response = await fetch(`${server}/customers/movies/${id}`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
